@@ -4,7 +4,20 @@
     <div class="container">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                     {{-- Dropdown Filter Kelas --}}
+                    <div class="d-flex align-items-center">
+                        <label class="me-2">Filter Kelas:</label>
+                        <select id="filterKelas" class="form-select" style="width: 200px;">
+                            <option value="">-- Semua Kelas --</option>
+                            @foreach ($kelas as $k)
+                                <option value="{{ $k->id }}" 
+                                    {{ request('kelas_id') == $k->id ? 'selected' : '' }}>
+                                    {{ $k->nama_kelas }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addAlternatifModal">
                         + Tambah Alternatif
                     </button>
@@ -134,4 +147,16 @@
             </form>
         </div>
     </div>
+     {{-- Script Filter Otomatis --}}
+    <script>
+        document.getElementById('filterKelas').addEventListener('change', function() {
+            let kelasId = this.value;
+            let url = "{{ route('alternatif.index') }}";
+            if (kelasId) {
+                window.location.href = url + "?kelas_id=" + kelasId;
+            } else {
+                window.location.href = url; // tampilkan semua
+            }
+        });
+    </script>
 @endsection

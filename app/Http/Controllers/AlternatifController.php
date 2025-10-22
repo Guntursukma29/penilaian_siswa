@@ -8,12 +8,22 @@ use Illuminate\Http\Request;
 
 class AlternatifController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $alternatif = Alternatif::with('kelas')->get(); // ambil data dengan relasi kelas
-        $kelas = Kelas::all(); // untuk dropdown
+        $kelas = Kelas::all();
+
+        $query = Alternatif::with('kelas');
+
+        // Jika ada filter kelas
+        if ($request->has('kelas_id') && $request->kelas_id != '') {
+            $query->where('kelas_id', $request->kelas_id);
+        }
+
+        $alternatif = $query->get();
+
         return view('alternatif.index', compact('alternatif', 'kelas'));
     }
+
 
     public function store(Request $request)
     {

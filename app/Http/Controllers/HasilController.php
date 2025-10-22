@@ -4,16 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Alternatif;
 use App\Models\Kriteria;
+use App\Models\Kelas;
+use Illuminate\Http\Request;
 
 class HasilController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kriteria   = Kriteria::all();
-        $alternatif = Alternatif::with('nilaiKriteria')->get();
+        $kelas = Kelas::all();
+        $kelasId = $request->get('kelas_id');
 
-        // hitung ulang pakai metode WP (bisa refactor ke service/helper)
+        // Ambil alternatif berdasarkan kelas (jika ada filter)
+        $alternatifQuery = Alternatif::with(['nilaiKriteria', 'kelas']);
+        if ($kelasId) {
+            $alternatifQuery->where('kelas_id', $kelasId);
+        }
+        $alternatif = $alternatifQuery->get();
+
+        $kriteria = Kriteria::all();
         $totalBobot = $kriteria->sum('bobot');
+
         $bobotNormalisasi = [];
         foreach ($kriteria as $krit) {
             $bobotNormalisasi[$krit->id] = $krit->bobot / $totalBobot;
@@ -33,15 +43,17 @@ class HasilController extends Controller
 
         $totalS = array_sum($nilaiS);
         $ranking = [];
+
         foreach ($alternatif as $alt) {
             $ranking[] = [
                 'alternatif' => $alt->nama_alternatif,
-                'V' => $nilaiS[$alt->id] / $totalS
+                'kelas' => $alt->kelas->nama_kelas ?? '-',
+                'V' => $totalS > 0 ? $nilaiS[$alt->id] / $totalS : 0,
             ];
         }
 
         $ranking = collect($ranking)->sortByDesc('V');
 
-        return view('hasil.index', compact('ranking'));
+        return view('hasil.index', compact('ranking', 'kelas', 'kelasId'));
     }
 }

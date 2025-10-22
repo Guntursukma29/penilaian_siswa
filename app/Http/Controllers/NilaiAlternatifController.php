@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\NilaiAlternatif;
 use App\Models\Alternatif;
 use App\Models\Kriteria;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\NilaiAlternatifImport;
 use Illuminate\Http\Request;
 
 class NilaiAlternatifController extends Controller
@@ -36,5 +38,15 @@ class NilaiAlternatifController extends Controller
         }
 
         return redirect()->route('nilai_alternatif.index')->with('success', 'Nilai berhasil disimpan.');
+    }
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls'
+        ]);
+
+        Excel::import(new NilaiAlternatifImport, $request->file('file'));
+
+        return redirect()->route('nilai_alternatif.index')->with('success', 'Data berhasil diimport dari Excel.');
     }
 }
