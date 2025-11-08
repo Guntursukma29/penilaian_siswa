@@ -23,16 +23,18 @@
                                 <input type="email" name="email" class="form-control" id="email"
                                     value="{{ $user->email }}" required>
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="role">Role</label>
-                                <select name="role" id="role" class="form-select">
-                                    <option value="administrator" {{ $user->role == 'administrator' ? 'selected' : '' }}>
-                                        Administrator
-                                    </option>
-                                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin
-                                    </option>
-                                </select>
-                            </div>
+                            @if (Auth::user()->role === 'administrator')
+                                <div class="form-group mb-3">
+                                    <label for="role">Role</label>
+                                    <select name="role" id="role" class="form-select">
+                                        <option value="administrator" {{ $user->role == 'administrator' ? 'selected' : '' }}>
+                                            Administrator
+                                        </option>
+                                        <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin
+                                        </option>
+                                    </select>
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Kolom Kanan -->
@@ -52,7 +54,7 @@
                     <!-- Tombol Aksi -->
                     <div class="form-group mt-3">
                         <button type="submit" class="btn btn-success">Update</button>
-                        <a href="{{ route('users.index') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('home') }}" class="btn btn-secondary">Kembali</a>
                     </div>
                 </form>
             </div>

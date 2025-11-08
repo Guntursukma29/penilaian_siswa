@@ -11,7 +11,9 @@ class PerhitunganWPController extends Controller
     public function index()
     {
         $kriteria   = Kriteria::all();
-        $alternatif = Alternatif::with('nilaiKriteria')->get();
+        $alternatif = Alternatif::with('nilaiKriteria')
+            ->orderBy('id', 'ASC')
+            ->get();
 
         // =========================
         // 1. Normalisasi Bobot

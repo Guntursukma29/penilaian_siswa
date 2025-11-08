@@ -2,17 +2,37 @@
 
 @section('content')
     <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <i class="bi bi-check-circle me-2"></i>
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        {{-- ⚠️ Alert Error Validasi --}}
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                <strong>Terjadi kesalahan!</strong>
+                <ul class="mb-0 mt-2">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                     {{-- Dropdown Filter Kelas --}}
+                    {{-- Dropdown Filter Kelas --}}
                     <div class="d-flex align-items-center">
                         <label class="me-2">Filter Kelas:</label>
                         <select id="filterKelas" class="form-select" style="width: 200px;">
                             <option value="">-- Semua Kelas --</option>
                             @foreach ($kelas as $k)
-                                <option value="{{ $k->id }}" 
-                                    {{ request('kelas_id') == $k->id ? 'selected' : '' }}>
+                                <option value="{{ $k->id }}" {{ request('kelas_id') == $k->id ? 'selected' : '' }}>
                                     {{ $k->nama_kelas }}
                                 </option>
                             @endforeach
@@ -22,6 +42,7 @@
                         + Tambah Alternatif
                     </button>
                 </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="basic-datatables" class="table table-striped table-hover basic-datatables">
@@ -122,10 +143,6 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label>Kode</label>
-                            <input type="text" name="kode" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
                             <label>Nama Alternatif</label>
                             <input type="text" name="nama_alternatif" class="form-control" required>
                         </div>
@@ -147,7 +164,8 @@
             </form>
         </div>
     </div>
-     {{-- Script Filter Otomatis --}}
+
+    {{-- Script Filter Otomatis --}}
     <script>
         document.getElementById('filterKelas').addEventListener('change', function() {
             let kelasId = this.value;

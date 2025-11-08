@@ -46,12 +46,12 @@
                         </a>
                     </li>
 
-                    <li class="nav-item {{ request()->routeIs('alternatif.index') ? 'active' : '' }}">
+                    {{-- <li class="nav-item {{ request()->routeIs('alternatif.index') ? 'active' : '' }}">
                         <a href="{{ route('alternatif.index') }}">
                             <i class="fas fa-file"></i>
                             <p>Alternatif</p>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item {{ request()->routeIs('riwayat.index') ? 'active' : '' }}">
                         <a href="{{ route('riwayat.index') }}">
