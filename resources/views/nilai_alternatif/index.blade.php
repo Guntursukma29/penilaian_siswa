@@ -6,7 +6,8 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h5>Data Nilai Alternatif</h5>
-                    <form action="{{ route('nilai_alternatif.import') }}" method="POST" enctype="multipart/form-data" class="d-flex gap-2">
+                    <form action="{{ route('nilai_alternatif.import') }}" method="POST" enctype="multipart/form-data"
+                        class="d-flex gap-2">
                         @csrf
                         <input type="file" name="file" class="form-control" accept=".xls,.xlsx" required>
                         <button type="submit" class="btn btn-success">Import Excel</button>
@@ -18,6 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>Alternatif</th>
+                                    {{-- <th>Kelas</th> --}}
                                     @foreach ($kriteria as $krit)
                                         <th>{{ $krit->nama_kriteria }}</th>
                                     @endforeach
@@ -28,6 +30,7 @@
                                 @foreach ($alternatif as $alt)
                                     <tr>
                                         <td>{{ $alt->nama_alternatif }}</td>
+                                        {{-- <td>{{ $alt->kelas->nama_kelas }}</td> --}}
                                         @foreach ($kriteria as $krit)
                                             @php
                                                 $nilai = $alt->nilaiKriteria->firstWhere('kriteria_id', $krit->id);

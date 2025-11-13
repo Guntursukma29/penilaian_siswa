@@ -12,6 +12,7 @@
                     <thead>
                         <tr>
                             <th>Kriteria</th>
+                            {{-- <th>Kelas</th> --}}
                             <th>Bobot</th>
                             <th>Normalisasi</th>
                             <th>Tipe</th>
@@ -21,6 +22,7 @@
                         @foreach ($kriteria as $krit)
                             <tr>
                                 <td>{{ $krit->nama_kriteria }}</td>
+                                {{-- <td>{{ $krit->kelas->nama_kelas }}</td> --}}
                                 <td>{{ $krit->bobot }}</td>
                                 <td>{{ number_format($bobotNormalisasi[$krit->id], 4) }}</td>
                                 <td>{{ ucfirst($krit->tipe) }}</td>
