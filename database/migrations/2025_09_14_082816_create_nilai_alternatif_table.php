@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('alternatif_id')->constrained('alternatif')->onDelete('cascade');
             $table->foreignId('kriteria_id')->constrained('kriteria')->onDelete('cascade');
+            $table->foreignId('kelas_id')
+                ->nullable()
+                ->constrained('kelas')
+                ->nullOnDelete();
             $table->decimal('nilai', 8, 2); // nilai kriteria untuk alternatif tertentu
             $table->timestamps();
         });

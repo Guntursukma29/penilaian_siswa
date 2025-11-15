@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\NilaiAlternatif;
 use App\Models\Alternatif;
 use App\Models\Kriteria;
+use App\Models\Kelas;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\NilaiAlternatifImport;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class NilaiAlternatifController extends Controller
 {
     public function index()
     {
-        $alternatif = Alternatif::with('nilaiKriteria.kriteria')->get();
+        $alternatif = Alternatif::with('nilaiKriteria.kriteria', 'kelas')->get();
         $kriteria   = Kriteria::all();
 
         return view('nilai_alternatif.index', compact('alternatif', 'kriteria'));

@@ -14,6 +14,7 @@ class NilaiAlternatif extends Model
     protected $fillable = [
         'alternatif_id',
         'kriteria_id',
+        'kelas_id',
         'nilai',
     ];
 
@@ -25,5 +26,10 @@ class NilaiAlternatif extends Model
     public function kriteria()
     {
         return $this->belongsTo(Kriteria::class, 'kriteria_id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 }

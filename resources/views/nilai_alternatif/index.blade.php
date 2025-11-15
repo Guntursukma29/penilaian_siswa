@@ -19,7 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>Alternatif</th>
-                                    {{-- <th>Kelas</th> --}}
+                                    <th>Kelas</th>
                                     @foreach ($kriteria as $krit)
                                         <th>{{ $krit->nama_kriteria }}</th>
                                     @endforeach
@@ -30,7 +30,7 @@
                                 @foreach ($alternatif as $alt)
                                     <tr>
                                         <td>{{ $alt->nama_alternatif }}</td>
-                                        {{-- <td>{{ $alt->kelas->nama_kelas }}</td> --}}
+                                        <td>{{ $alt->kelas->nama_kelas ?? '-' }}</td>
                                         @foreach ($kriteria as $krit)
                                             @php
                                                 $nilai = $alt->nilaiKriteria->firstWhere('kriteria_id', $krit->id);
