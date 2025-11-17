@@ -48,7 +48,7 @@
                         <table id="basic-datatables" class="table table-striped table-hover basic-datatables">
                             <thead>
                                 <tr>
-                                    <th>Kode</th>
+                                    <th>No</th>
                                     <th>Nama Alternatif</th>
                                     <th>Kelas</th>
                                     <th>Aksi</th>

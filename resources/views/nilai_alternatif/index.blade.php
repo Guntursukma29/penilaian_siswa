@@ -18,6 +18,7 @@
                         <table class="table table-bordered table-striped basic-datatables">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Alternatif</th>
                                     <th>Kelas</th>
                                     @foreach ($kriteria as $krit)
@@ -29,6 +30,7 @@
                             <tbody>
                                 @foreach ($alternatif as $alt)
                                     <tr>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $alt->nama_alternatif }}</td>
                                         <td>{{ $alt->kelas->nama_kelas ?? '-' }}</td>
                                         @foreach ($kriteria as $krit)
