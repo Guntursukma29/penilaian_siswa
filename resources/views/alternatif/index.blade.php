@@ -89,11 +89,11 @@
                                                             data-bs-dismiss="modal"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="mb-3">
+                                                        {{-- <div class="mb-3">
                                                             <label>Kode</label>
                                                             <input type="text" name="kode" class="form-control"
                                                                 value="{{ $row->kode }}" required>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="mb-3">
                                                             <label>Nama Alternatif</label>
                                                             <input type="text" name="nama_alternatif"
