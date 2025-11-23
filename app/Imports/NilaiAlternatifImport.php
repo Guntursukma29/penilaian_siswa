@@ -32,7 +32,7 @@ class NilaiAlternatifImport implements ToCollection
             $alternatif = Alternatif::updateOrCreate(
                 ['nama_alternatif' => $rowData['nama_alternatif']],
                 [
-                    'kode' => $rowData['kode'] ?? 'ALT-' . strtoupper(uniqid()),
+                    'kode'     => $rowData['kode'] ?? $this->generateKode(),
                     'kelas_id' => $kelas->id,
                 ]
             );
@@ -54,5 +54,21 @@ class NilaiAlternatifImport implements ToCollection
                 }
             }
         }
+    }
+    private function generateKode()
+    {
+        $last = Alternatif::orderBy('id', 'desc')->first();
+
+        if (!$last || !$last->kode) {
+            return 'A01';
+        }
+
+        // Ambil angka dari kode terakhir, misal A07 → 7
+        $number = (int) filter_var($last->kode, FILTER_SANITIZE_NUMBER_INT);
+
+        $next = $number + 1;
+
+        // Format kembali ke A01, A02, dst
+        return 'A' . str_pad($next, 2, '0', STR_PAD_LEFT);
     }
 }
