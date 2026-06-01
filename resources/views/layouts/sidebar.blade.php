@@ -39,31 +39,49 @@
 
                 {{-- ADMINISTRATOR MENU --}}
                 @if (Auth::user()->role === 'administrator')
+                    <li class="nav-item {{ request()->routeIs('kelas.index') ? 'active' : '' }}">
+                        <a href="{{ route('kelas.index') }}">
+                            <i class="fas fa-school"></i>
+                            <p>Kelas</p>
+                        </a>
+                    </li>
                     <li class="nav-item {{ request()->routeIs('kriteria.index') ? 'active' : '' }}">
                         <a href="{{ route('kriteria.index') }}">
                             <i class="fas fa-file"></i>
                             <p>Kriteria</p>
                         </a>
                     </li>
-
-                    {{-- <li class="nav-item {{ request()->routeIs('alternatif.index') ? 'active' : '' }}">
+                @endif
+                <li class="nav-item {{ request()->routeIs('alternatif.index') ? 'active' : '' }}">
+                    <a href="{{ route('alternatif.index') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Alternatif</p>
+                    </a>
+                </li>
+                {{-- Menu Umum (Bisa diakses semua role) --}}
+                <li class="nav-item {{ request()->routeIs('perhitungan.index') ? 'active' : '' }}">
+                    <a href="{{ route('perhitungan.index') }}">
+                        <i class="fas fa-calculator"></i>
+                        <p>Perhitungan</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->routeIs('hasil.index') ? 'active' : '' }}">
+                    <a href="{{ route('hasil.index') }}">
+                        <i class="fas fa-chart-line"></i>
+                        <p>Hasil</p>
+                    </a>
+                </li>
+                {{-- <li class="nav-item {{ request()->routeIs('alternatif.index') ? 'active' : '' }}">
                         <a href="{{ route('alternatif.index') }}">
                             <i class="fas fa-file"></i>
                             <p>Alternatif</p>
                         </a>
                     </li> --}}
-
+                @if (Auth::user()->role === 'administrator')
                     <li class="nav-item {{ request()->routeIs('riwayat.index') ? 'active' : '' }}">
                         <a href="{{ route('riwayat.index') }}">
                             <i class="fas fa-clock"></i>
                             <p>Riwayat</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item {{ request()->routeIs('kelas.index') ? 'active' : '' }}">
-                        <a href="{{ route('kelas.index') }}">
-                            <i class="fas fa-school"></i>
-                            <p>Kelas</p>
                         </a>
                     </li>
 
@@ -83,29 +101,10 @@
                             <p>Penilaian</p>
                         </a>
                     </li>
-
-                    
                 @endif
-                <li class="nav-item {{ request()->routeIs('alternatif.index') ? 'active' : '' }}">
-                        <a href="{{ route('alternatif.index') }}">
-                            <i class="fas fa-user"></i>
-                            <p>Alternatif</p>
-                        </a>
-                    </li>
-                {{-- Menu Umum (Bisa diakses semua role) --}}
-                <li class="nav-item {{ request()->routeIs('perhitungan.index') ? 'active' : '' }}">
-                    <a href="{{ route('perhitungan.index') }}">
-                        <i class="fas fa-calculator"></i>
-                        <p>Perhitungan</p>
-                    </a>
-                </li>
 
-                <li class="nav-item {{ request()->routeIs('hasil.index') ? 'active' : '' }}">
-                    <a href="{{ route('hasil.index') }}">
-                        <i class="fas fa-chart-line"></i>
-                        <p>Hasil</p>
-                    </a>
-                </li>
+
+
 
                 {{-- Setting Section --}}
                 <li class="nav-section">
@@ -124,7 +123,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i>
                         <p>Logout</p>
                     </a>
