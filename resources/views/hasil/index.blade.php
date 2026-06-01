@@ -25,6 +25,8 @@
         <div class="card">
             <div class="card-body">
                 <table class="table table-bordered table-striped basic-datatables">
+                    <p>Berikut merupakan nama-nam santri yang di rekomendasikan sebagai santri teladan berdasarkan nilai
+                        vektor tertinggi</p>
                     <thead>
                         <tr>
                             <th>Peringkat</th>
