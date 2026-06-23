@@ -8,7 +8,7 @@
         <div class="card mb-3">
             <div class="card-header">Normalisasi Bobot</div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered basic-datatables">
                     <thead>
                         <tr>
                             <th>Kriteria</th>
@@ -37,7 +37,7 @@
         <div class="card mb-3">
             <div class="card-header">Perhitungan Vektor S</div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered basic-datatables">
                     <thead>
                         <tr>
                             <th>Alternatif</th>
@@ -66,7 +66,7 @@
         <div class="card mb-3">
             <div class="card-header">Perhitungan Vektor V</div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered basic-datatables">
                     <thead>
                         <tr>
                             <th>Alternatif</th>
@@ -91,7 +91,7 @@
         <div class="card">
             <div class="card-header">Ranking Alternatif</div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered basic-datatables">
                     <thead>
                         <tr>
                             <th>Peringkat</th>

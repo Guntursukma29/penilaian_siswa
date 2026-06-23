@@ -52,7 +52,10 @@ class HasilController extends Controller
             ];
         }
 
-        $ranking = collect($ranking)->sortByDesc('V');
+        $ranking = collect($ranking)
+            ->sortByDesc('V')
+            ->take(5)
+            ->values();
 
         return view('hasil.index', compact('ranking', 'kelas', 'kelasId'));
     }
