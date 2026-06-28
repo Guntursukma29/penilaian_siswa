@@ -25,7 +25,18 @@ Route::get('/riwayat/cetak/{kelas_id}', [RiwayatController::class, 'cetakPDF'])-
 // Hasil Akhir WP
 Route::get('/hasil', [HasilController::class, 'index'])
     ->name('hasil.index');
+Route::delete('/alternatif/destroy-all', [AlternatifController::class, 'destroyAll'])
+    ->name('alternatif.destroyAll');
 Route::resource('alternatif', AlternatifController::class);
+Route::delete('/nilai-alternatif/destroy-all', [NilaiAlternatifController::class, 'destroyAll'])
+    ->name('nilai_alternatif.destroyAll');
+Route::get('nilai-alternatif', [NilaiAlternatifController::class, 'index'])->name('nilai_alternatif.index');
+Route::post('/nilai-alternatif/import', [NilaiAlternatifController::class, 'importExcel'])->name('nilai_alternatif.import');
+
+Route::post('nilai-alternatif/{alternatif}', [NilaiAlternatifController::class, 'storeOrUpdate'])->name('nilai_alternatif.storeOrUpdate');
+// Route::delete('/nilai-alternatif/destroy-all', [NilaiAlternatifController::class, 'destroyAll'])
+//     ->name('nilai_alternatif.destroyAll');
+
 Auth::routes();
 
 // =====================
@@ -41,9 +52,4 @@ Route::middleware(['auth', 'role:administrator'])->group(function () {
 // ============
 // ADMIN ACCESS
 // ============
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('nilai-alternatif', [NilaiAlternatifController::class, 'index'])->name('nilai_alternatif.index');
-    Route::post('/nilai-alternatif/import', [NilaiAlternatifController::class, 'importExcel'])->name('nilai_alternatif.import');
-
-    Route::post('nilai-alternatif/{alternatif}', [NilaiAlternatifController::class, 'storeOrUpdate'])->name('nilai_alternatif.storeOrUpdate');
-});
+Route::middleware(['auth', 'role:admin'])->group(function () {});

@@ -78,4 +78,15 @@ class AlternatifController extends Controller
 
         return redirect()->route('alternatif.index')->with('success', 'Alternatif berhasil dihapus.');
     }
+    public function destroyAll()
+    {
+        Alternatif::query()->delete();
+
+        return redirect()->route('alternatif.index')
+            ->with('success', 'Semua data alternatif berhasil dihapus.');
+    }
+    // public function destroyAll()
+    // {
+    //     // ...
+    // }
 }

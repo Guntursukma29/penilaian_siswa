@@ -4,14 +4,42 @@
     <div class="container">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <h5>Data Nilai Alternatif</h5>
-                    <form action="{{ route('nilai_alternatif.import') }}" method="POST" enctype="multipart/form-data"
-                        class="d-flex gap-2">
-                        @csrf
-                        <input type="file" name="file" class="form-control" accept=".xls,.xlsx" required>
-                        <button type="submit" class="btn btn-success">Import Excel</button>
-                    </form>
+                <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                    {{-- Judul --}}
+                    <h5 class="mb-0">
+                        <i class="fas fa-table me-2"></i>Data Nilai Alternatif
+                    </h5>
+
+                    {{-- Aksi --}}
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+
+                        {{-- Form Import --}}
+                        <form action="{{ route('nilai_alternatif.import') }}" method="POST" enctype="multipart/form-data"
+                            class="d-flex align-items-center gap-2 m-0">
+                            @csrf
+
+                            <input type="file" name="file" class="form-control form-control-sm" accept=".xls,.xlsx"
+                                required>
+
+                            <button type="submit" class="btn btn-success btn-sm">
+                                <i class="fas fa-file-excel me-1"></i> Import Excel
+                            </button>
+                        </form>
+
+                        {{-- Tombol Hapus Semua --}}
+                        <form action="{{ route('nilai_alternatif.destroyAll') }}" method="POST" class="m-0"
+                            onsubmit="return confirm('Yakin ingin menghapus seluruh data nilai alternatif?')">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt me-1"></i> Hapus Semua
+                            </button>
+                        </form>
+
+                    </div>
+
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

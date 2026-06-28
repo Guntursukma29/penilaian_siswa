@@ -94,14 +94,14 @@
                 @endif
 
                 {{-- ADMIN MENU --}}
-                @if (Auth::user()->role === 'admin')
-                    <li class="nav-item {{ request()->routeIs('nilai_alternatif.index') ? 'active' : '' }}">
-                        <a href="{{ route('nilai_alternatif.index') }}">
-                            <i class="fas fa-edit"></i>
-                            <p>Penilaian</p>
-                        </a>
-                    </li>
-                @endif
+                {{-- @if (Auth::user()->role === 'admin') --}}
+                <li class="nav-item {{ request()->routeIs('nilai_alternatif.index') ? 'active' : '' }}">
+                    <a href="{{ route('nilai_alternatif.index') }}">
+                        <i class="fas fa-edit"></i>
+                        <p>Penilaian</p>
+                    </a>
+                </li>
+                {{-- @endif --}}
 
 
 

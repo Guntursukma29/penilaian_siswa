@@ -25,11 +25,12 @@
         @endif
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    {{-- Dropdown Filter Kelas --}}
+                <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+                    {{-- Filter Kelas --}}
                     <div class="d-flex align-items-center">
-                        <label class="me-2">Filter Kelas:</label>
-                        <select id="filterKelas" class="form-select" style="width: 200px;">
+                        <label for="filterKelas" class="me-2 fw-semibold mb-0">Filter Kelas:</label>
+                        <select id="filterKelas" class="form-select" style="width: 220px;">
                             <option value="">-- Semua Kelas --</option>
                             @foreach ($kelas as $k)
                                 <option value="{{ $k->id }}" {{ request('kelas_id') == $k->id ? 'selected' : '' }}>
@@ -38,9 +39,27 @@
                             @endforeach
                         </select>
                     </div>
-                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addAlternatifModal">
-                        + Tambah Alternatif
-                    </button>
+
+                    {{-- Tombol Aksi --}}
+                    <div class="d-flex align-items-center gap-2">
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#addAlternatifModal">
+                            <i class="fas fa-plus me-1"></i> Tambah Alternatif
+                        </button>
+
+                        <form action="{{ route('alternatif.destroyAll') }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Yakin ingin menghapus semua data?')">
+                                Hapus Semua
+                            </button>
+                        </form>
+
+                    </div>
+
                 </div>
 
                 <div class="card-body">

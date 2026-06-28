@@ -50,4 +50,12 @@ class NilaiAlternatifController extends Controller
 
         return redirect()->route('nilai_alternatif.index')->with('success', 'Data berhasil diimport dari Excel.');
     }
+    public function destroyAll()
+    {
+        NilaiAlternatif::query()->delete(); // Menghapus seluruh data tanpa reset auto increment
+
+        return redirect()
+            ->route('nilai_alternatif.index')
+            ->with('success', 'Seluruh data nilai alternatif berhasil dihapus.');
+    }
 }
